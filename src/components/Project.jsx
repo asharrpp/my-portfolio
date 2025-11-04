@@ -1,6 +1,6 @@
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/Card";
 
 const Projects = () => {
   const projects = [
