@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* === Custom Theme Colors === */
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+}
+
+/* === Light Mode === */
+:root {
+  --background: 240 10% 99%;
+  --foreground: 240 10% 10%;
+  --primary: 265 90% 60%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 220 90% 60%;
+  --accent-foreground: 0 0% 100%;
+  --border: 240 30% 90%;
+}
+
+/* === Dark Mode === */
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 240 10% 98%;
+  --primary: 265 85% 65%;
+  --primary-foreground: 0 0% 98%;
+  --accent: 220 85% 60%;
+  --accent-foreground: 0 0% 100%;
+  --border: 240 20% 20%;
+}
+
+/* === Optional Gradient === */
+.gradient-bg {
+  background: linear-gradient(135deg, hsl(265 85% 65%), hsl(220 85% 60%));
+}
+.gradient-text {
+  background: linear-gradient(135deg, hsl(265 85% 65%), hsl(220 85% 60%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === Global body styling === */
+body {
+  @apply bg-background text-foreground antialiased transition-colors duration-500;
+}
+section {
+  @apply py-16 px-6 sm:px-10 md:px-16;
+}
