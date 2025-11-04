@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/Card";
 import { Code, Smartphone, Zap, Shield, Globe, Paintbrush } from "lucide-react";
 
 const Services = () => {
