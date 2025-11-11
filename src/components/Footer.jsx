@@ -22,7 +22,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background text-foreground py-10">
+    <footer className="bg-background text-foreground py-2">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
 
           {/* Footer Links */}
-          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-30">
+          <div class="grid grid-cols-2 space-x-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-30 ">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category} className="min-w-[120px]s">
                 <h4 className="font-semibold text-foreground mb-3">

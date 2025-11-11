@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/Card";
+import { Card } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,15 +13,45 @@ const Contact = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e) => {
+  // Replace these with your EmailJS credentials
+  const SERVICE_ID = "service_5j06e5d";
+  const TEMPLATE_ID = "template_u0kistb";
+  const PUBLIC_KEY = "lonttmrYw2o3kUnrQ";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        PUBLIC_KEY
+      );
+
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -52,15 +83,15 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-secondary/20">
+    <section id="contact" className="py-8 bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            Get In <span className="gradient-primary bg-clip-text text-fuchsia-300">Touch</span>
-          </h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
+           Get In <span className="gradient-primary bg-clip-text text-fuchsia-300">Touch</span>
+        </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start your next project? Let's discuss how i can help bring your vision to life.
+            Ready to start your next project? Let's discuss how we can help bring your vision to life.
           </p>
         </div>
 
@@ -70,7 +101,7 @@ const Contact = () => {
             {contactInfo.map((info, index) => (
               <Card key={index} className="p-6 shadow-card border-border/20 bg-card/50 backdrop-blur-sm">
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center shrink-0">
                     <info.icon className="h-6 w-6 text-primary-foreground" />
                   </div>
                   <div>
@@ -84,15 +115,15 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="p-8 shadow-elegant border-border/20 bg-card/50 backdrop-blur-sm">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                      Name
-                    </label>
-                    <Input
+          <div className="lg:col-span-2 gap-2">
+           <Card className="p-8 shadow-elegant border-border/20 bg-card/50 backdrop-blur-sm">
+            <form onSubmit={handleSubmit} className="space-y-6">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <div>
+                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                 Name
+                 </label>
+                     <Input
                       id="name"
                       name="name"
                       value={formData.name}
@@ -103,7 +134,7 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2 ">
                       Email
                     </label>
                     <Input
