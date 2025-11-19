@@ -54,7 +54,7 @@ const About = () => {
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-muted-foreground">Projects Completed</span>
-                  <span className="text-2xl font-bold text-primary">50+</span>
+                  <span className="text-2xl font-bold text-primary">15+</span>
                 </div>
                 <div className="w-full bg-border rounded-full h-2">
                   <div className="gradient-primary h-2 rounded-full" style={{ width: '95%' }}></div>
